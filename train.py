@@ -156,13 +156,13 @@ def get_batch(sett, iIter):
         w = random.randint(0, ow-wi-1)
         
         if opt.cuda:
-            segmInputE = sample['R8s'][:,0:inpf,:,h:h+hi-1,w:w+wi-1].cuda()
-            segmTargetE = sample['R8s'][:,inpf:inpf+tf,:,h:h+hi-1,w:w+wi-1].cuda()
+            segmInputE = sample['R8s'][:,0:inpf,:,h:h+hi,w:w+wi].cuda()
+            segmTargetE = sample['R8s'][:,inpf:inpf+tf,:,h:h+hi,w:w+wi].cuda()
             
             
         else:
-            segmInputE = sample['R8s'][:,0:inpf,:,h:h+hi-1,w:w+wi-1]#.cuda()
-            segmTargetE = sample['R8s'][:,inpf:inpf+tf,:,h:h+hi-1,w:w+wi-1]#.cuda()
+            segmInputE = sample['R8s'][:,0:inpf,:,h:h+hi,w:w+wi]#.cuda()
+            segmTargetE = sample['R8s'][:,inpf:inpf+tf,:,h:h+hi,w:w+wi]#.cuda()
     segmTargetE.resize_(ob, tf*ch, wi, hi)
     segmInputE.resize_(ob, inpf*ch, wi, hi)
     segmInputE, segmTargetE = Variable(segmInputE,requires_grad=True), Variable(segmTargetE,requires_grad=False)
